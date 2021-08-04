@@ -27,7 +27,7 @@ highlight_theme: syntax-base16.monokai.dark # select a dark theme for the code h
 author: 안규진 # add your name
 author-pic: profile-photo.jpeg
 #about-author: Engineer, industry executive, research enthusiast. Avid learner with diverse interests in coding, machine learning, artificial intelligence and reinforcement learning. 17+ years of experience working in multinational corporations.
-about-author: 백엔드 개발자 안규진
+about-author: Back-end, DevOps에 대한 저의 생각을 포스팅합니다. 어디까지나 저의 생각이기에 합리적인 비판이 있다면 언제든지 남겨주세요. 
 
 # Contact links
 email: agj017@gmail.com # Add your Email address

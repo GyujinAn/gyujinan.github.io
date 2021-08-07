@@ -27,13 +27,13 @@ highlight_theme: syntax-base16.monokai.dark # select a dark theme for the code h
 author: 안규진 # add your name
 author-pic: profile-photo.jpeg
 #about-author: Engineer, industry executive, research enthusiast. Avid learner with diverse interests in coding, machine learning, artificial intelligence and reinforcement learning. 17+ years of experience working in multinational corporations.
-about-author: Back-end, DevOps에 대한 저의 생각을 포스팅합니다. 어디까지나 저의 생각이기에 합리적인 비판이 있다면 언제든지 남겨주세요. 
+about-author: 개발에 대한 전반적인 저의 생각을 포스팅합니다. 합리적 비판이 있다면 댓글 부탁드립니다.
 
 # Contact links
 email: agj017@gmail.com # Add your Email address
 phone: # Add your Phone number
-website: https://gyujinan.github.io # Add your website
-linkedin: Gyujin An # Add your Linkedin handle
+website: gyujinan.github.io # Add your website
+linkedin: www.linkedin.com/in/gyujin-an-515985192 # Add your Linkedin handle
 github: GyujinAn # Add your Github handle
 #twitter: '@MvmThe' # Add your Twitter handle
 #bandcamp: armandomaynez # Add your Bandcamp username

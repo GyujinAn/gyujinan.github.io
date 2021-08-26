@@ -4,7 +4,7 @@ read_time: true
 show_date: true
 title: "Github뉴스 2020/12/15"
 date: 2021-08-18
-img: posts/resource/main.jpg
+img: posts/github_news_20210818/main.jpg
 tags: ["뉴스","번역"]
 category: opinion
 author: Gyujin An
@@ -54,5 +54,5 @@ description: ""
 
 > 제한성 - 토큰을 통한 접근가능한 GitHub의 기능을 제한 할 수 있습니다.
 
-> 무작위성 - 토큰은 
+> 무작위성 - 토큰은 사전형식의 인증 정보 혹은 우리가 기억하고 정기적으로 입력하는 패스워드 형식 즉, 다수의 시도를 강요함으로써 예측 가능한 인증 정보가 아닙니다.
 

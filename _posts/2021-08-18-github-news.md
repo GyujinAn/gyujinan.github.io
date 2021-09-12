@@ -1,14 +1,8 @@
 ---
 layout: post
-read_time: true
-show_date: true
-title: "Github뉴스 2020/12/15"
+title: "Github 뉴스 2020/12/15"
 date: 2021-08-18
-img: posts/github_news_20210818/main.jpg
-tags: ["뉴스","번역"]
-category: opinion
-author: Gyujin An
-description: ""
+category: 뉴스
 ---
 
 최근에 git push를 실행했습니다만, 아래 같은 에러가 발생했습니다. 

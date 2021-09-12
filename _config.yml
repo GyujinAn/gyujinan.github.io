@@ -1,82 +1,58 @@
-# Site settings
-title: GyujinAn blog
-description: 'Artificial Intelligence trends and concepts made easy.' # this means to ignore newlines until "baseurl:"
-permalink: ':title:output_ext'
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://gyujinan.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-logo: "/assets/img/branding/MVM-logo-full.svg"
-logo-icon: "/assets/img/branding/MVM-symbol.svg"
-logo-icon-SEO: "/assets/img/branding/MVM-symbol-black.png" # must be a non SVG file
-
-# Night/Dark mode
-# Default mode is "auto", "auto" is for auto nightshift
-# (19:00 - 07:00), "manual" is for manual toggle, and
-# "on/off" is for default on/off.
+# Welcome to Jekyll!
 #
-# Whatever the user's choice is, it will supersede the
-# default setting of the site and be kept during the
-# visit (session). Only the dark mode setting is "manual",
-# it will be always kept on every visit (i.e. no matter
-# the browser is closed or not)
-night_mode: "auto"
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you: 
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
 
-logo-dark: "/assets/img/branding/MVM-logo-full-dark.svg"
-highlight_theme: syntax-base16.monokai.dark # select a dark theme for the code highlighter if needed
-
-# Author settings
-author: 안규진 # add your name
-author-pic: profile-photo.jpeg
-#about-author: Engineer, industry executive, research enthusiast. Avid learner with diverse interests in coding, machine learning, artificial intelligence and reinforcement learning. 17+ years of experience working in multinational corporations.
-about-author: 개발에 대한 전반적인 저의 생각을 포스팅합니다. 합리적 비판이 있다면 댓글 부탁드립니다.
-
-# Contact links
-email: agj017@gmail.com # Add your Email address
-phone: # Add your Phone number
-website: gyujinan.github.io # Add your website
-linkedin: yujin-an-515985192 # Add your Linkedin handle
-github: GyujinAn # Add your Github handle
-#twitter: '@MvmThe' # Add your Twitter handle
-#bandcamp: armandomaynez # Add your Bandcamp username
-
-# Newsletter
-mailchimp: "https://github.us1.list-manage.com/subscribe/post?u=8ece198b3eb260e6838461a60&amp;id=397d90b5f4"
-
-# Disqus
-discus_identifier: amaynez-github-io # Add your discus identifier
-comments_curtain: yes # leave empty to show the disqus embed directly
-
-# Tracker
-analytics: G-R8SZS2YBZK
-fbadmin: ar.maybach
-
-# Paginate
-paginate: 6
-paginate_path: 'page:num'
-words_per_minute: 200
-
-# Build settings
-markdown: kramdown
-mathjax: true
+title: Gyujinan
+email: agj017@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Themed by ejjoo
+# baseurl: "/" # the subpath of your site, e.g. /blog
+# url: "http://ejjoo.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+github_username: gyujinan
 highlighter: rouge
-compress_html:
-  clippings: all
-  comments: all
-  startings: [html, head, body]
-
-# Outputting
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-category_archive:
-  type: liquid
-  path: /categories/
-
-sass:
-  style: compressed
-
+svg:
+  optimize: true
+# Build settings
+# theme: minima
+highlighter-theme: monokai
+date_format: "%Y-%M-%D"
 plugins:
-  - jekyll-paginate
   - jekyll-feed
-  - jekyll-sitemap
+category_dir: category/
+tag_dir: tag/
 
-include: [_pages]
-exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock", "package-lock.json", "assets/css/sass/"]
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/

@@ -2,7 +2,7 @@
 layout: post
 title: "Github 뉴스 2020/12/15"
 date: 2021-08-18
-category: 뉴스
+category: news
 ---
 
 최근에 git push를 실행했습니다만, 아래 같은 에러가 발생했습니다. 

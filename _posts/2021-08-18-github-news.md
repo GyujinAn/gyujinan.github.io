@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Github 뉴스 2020/12/15"
+title: "2020년 12월 15일 Github 뉴스"
 date: 2021-08-18
 categories: news
 ---
@@ -32,7 +32,7 @@ fatal: unable to access 'https://github.com/GyujinAn/gyujinan.github.io.git/': T
 
 * 만약 당신의 계정이 이중 인증 방식을 통해서 인증 받고 있다면, 당신은 이미 토큰 인증 방식 혹은 SSH 기반의 인증방식을 사용한다.
 * 만약 당신이 GitHub 기업용 서버를 사용하고 있다면, 우리의 온프레미스 제품에 대해서는 기존의 방식을 유지 할 것이다.
-* 만약 당신이 GitHub App을 사용하고 있다면, 패스워드 인증이 지원되지 않으므로 기존 방식에 영향을 받지 않을 것 이다.
+* 만약 당신이 GitHub App을 사용하고 있다면, 패스워드 인증이 지원되지 않으므로 기존 방식에 영향을 받지 않을 것이다.
 
 ### 배경
 

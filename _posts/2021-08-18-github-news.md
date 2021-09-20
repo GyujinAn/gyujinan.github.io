@@ -15,7 +15,7 @@ fatal: unable to access 'https://github.com/GyujinAn/gyujinan.github.io.git/': T
 
 에러의 내용은 8월 13일부터 패스워드 인증 방식이 폐기되었고 개인 접근 토근을 사용해야된다는 내용이다. 
 
-그에 대한 [깃허브 블로그](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)의 포스팅이 있어 번역하였다.
+그에 대한 깃허브 블로그 (https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/)의 포스팅이 있어 번역하였다.
 
 
 # 깃 작업을 위한 토큰 인증 요구사항
@@ -61,5 +61,3 @@ fatal: unable to access 'https://github.com/GyujinAn/gyujinan.github.io.git/': T
 * 개발자의 경우, 현재 만약 당신이 GitHub.com에서 Git 작업을 위해 패스워드 인증을 사용하고 있다면 작업의 중단을 피하기 위해 당신은 2021년 8월 14일까지 HTTPS(권장) SSH key를 통한 개인 접근 토근을 사용해야한다. 만약 당신이 "you are using an outdated third-party integration"와 같은 경고 메세지를 받는다면 당신은 당신의 클라이언트 어플리케이션을 최신 버전으로 업데이트 해야됩니다.
 
 * 통합업체의 경우, 작업의 중단을 피하기 위해 당신은 2021년 8월 13일까지 웹 혹은 장치 인가 방식을 사용하여 통합업체들을 인증해야된다. 자세한 내용은 OAuth 앱 승인 혹은 개발자 블로그 공지를 참조하세요.
-
-

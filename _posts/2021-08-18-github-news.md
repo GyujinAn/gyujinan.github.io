@@ -7,9 +7,11 @@ categories: news
 
 최근에 git push를 실행했었다. 하지만 아래 같은 에러가 발생하였다. 
 
->remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
->remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
->fatal: unable to access 'https://github.com/GyujinAn/gyujinan.github.io.git/': The requested URL returned error: 403
+```
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: unable to access 'https://github.com/GyujinAn/gyujinan.github.io.git/': The requested URL returned error: 403
+```
 
 에러의 내용은 8월 13일부터 패스워드 인증 방식이 폐기되었고 개인 접근 토근을 사용해야된다는 내용이다. 
 

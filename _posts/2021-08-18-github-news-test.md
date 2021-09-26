@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "2020년 12월 15일 Github 뉴스"
-date: 2021-08-18
-categories: news
+title: "resource란 무엇인가?"
+date: 2021-08-05
+categories: general
 ---
 
 

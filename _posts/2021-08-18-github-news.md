@@ -58,6 +58,36 @@ fatal: unable to access 'https://github.com/GyujinAn/gyujinan.github.io.git/': T
 
 ### 사용자가 해야 할 사항
 
-* 개발자의 경우, 현재 만약 당신이 GitHub.com에서 Git 작업을 위해 패스워드 인증을 사용하고 있다면 작업의 중단을 피하기 위해 당신은 2021년 8월 14일까지 HTTPS(권장) SSH key를 통한 개인 접근 토근을 사용해야한다. 만약 당신이 "you are using an outdated third-party integration"와 같은 경고 메세지를 받는다면 당신은 당신의 클라이언트 어플리케이션을 최신 버전으로 업데이트 해야됩니다.
+* 개발자의 경우, 현재 만약 당신이 GitHub.com에서 Git 작업을 위해 패스워드 인증을 사용하고 있다면 작업의 중단을 피하기 위해 당신은 2021년 8월 14일까지 HTTPS(권장) SSH key를 통한 개인 접근 토근을 사용해야한다. 만약 당신이 "you are using an outdated third-party integration"와 같은 경고 메세지를 받는다면 당신은 당신의 클라이언트 어플리케이션을 최신 버전으로 업데이트 해야한다.
 
 * 통합업체의 경우, 작업의 중단을 피하기 위해 당신은 2021년 8월 13일까지 웹 혹은 장치 인가 방식을 사용하여 통합업체들을 인증해야된다. 자세한 내용은 OAuth 앱 승인 혹은 개발자 블로그 공지를 참조하세요.
+
+### 이중인증 활성화
+만약 당신이 당신의 계정에 대해 비밀번호 기반 인증 방식을 허용하고 싶지 않다면, 당신은 당신의 계정에 대해서 이중 인증 방식을 활성화 할 수 있다. 이것은 당신에게 깃과 타사를 통한 모든 인증 작업들에 대해서 개인 접근 토근을 사용하길 요구한다. 
+
+### 브라운아웃 ([의미](https://en.wikipedia.org/wiki/Brownout_(electricity)))
+영향 받을 모든 고객들이 인증 방식에 대한 변경을 알 수 있도록, 예정 된 브라운아웃 동안, 우리는 임시적으로 비밀번호 인증 방식을 지원하지 않을 것 이다. 그러면 일시적을 비밀번호를 사용하는 깃 작업들이 일시적으로 실패한다. 그 브라운아웃의 예정 일시는 아래와 같다.
+
+2021년 6월 30일
+
+From 7:00 AM UTC – 10:00 AM UTC
+
+From 4:00 PM UTC – 7:00 PM UTC
+
+2021년 7월 28일
+
+From 7:00 AM UTC – 10:00 AM UTC
+
+From 4:00 PM UTC – 7:00 PM UTC
+
+### 타임라인
+
+오늘 - 만약 당신이 깃헙에 대한 깃 작업을 패스워드 인증 방식을 통해 하고 있다면, 당신을 곧 인증방식에 대한 업데이트 촉구 이메일을 곧 받게 될 것이다.
+
+2021년 6월 30일 - 비밀번호 기반의 인증 방식을 사용하는 유저들에 대한 모든 깃 작업에 토큰 (혹은 ssh key) 인증이 요구 되어 질 것이다.
+
+ 2021년 7월 28일 - 인증 되어져야 하는 모든 작업에 대해서 토큰 (혹은 ssh key) 인증이 요구 되어 질 것이다.
+
+ If you have any questions, please see the related API password authentication blog post, learn more about keeping your account secure, or contact GitHub Support. Need a security key? Head over to the GitHub Shop.
+
+ 만약 당신이 어떤 질문이 있다면, API 비밀번호 인증 블로그 포스트를 보길 바란다.. 그리고 당신의 계정 보안 유지를 숙지하길 바란다. 혹은 깃헙 지원팀에 연락해주길 바란다. 보안키가 필요하다면 깃헙 shop에 방문하라.

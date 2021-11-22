@@ -20,7 +20,7 @@ categories: git
 
 ```
 
-➜  flowerduet-test git:(develop) ✗ git remote add fd https://gyujinan@bitbucket.org/okestrolab/flowerduet.git
+# git remote add sample-repo https://github.com/GyujinAn/sample.git
 
 ```
 
@@ -30,11 +30,11 @@ categories: git
 
 ```
 
-flowerduet-test git:(develop) ✗ git remote -v
-fd	https://gyujinan@bitbucket.org/okestrolab/flowerduet.git (fetch)
-fd	https://gyujinan@bitbucket.org/okestrolab/flowerduet.git (push)
-origin	https://gyujinan@bitbucket.org/okestrolab/flowerduet-test.git (fetch)
-origin	https://gyujinan@bitbucket.org/okestrolab/flowerduet-test.git (push)
+# git remote -v
+sample-repo	https://github.com/GyujinAn/sample.git (fetch)
+sample-repo	https://github.com/GyujinAn/sample.git (push)
+origin	https://github.com/GyujinAn/sample-origin.git (fetch)
+origin	https://github.com/GyujinAn/sample-origin.git (push)
 
 ```
 
@@ -44,19 +44,16 @@ origin	https://gyujinan@bitbucket.org/okestrolab/flowerduet-test.git (push)
 
 ```
 
-➜  flowerduet-test git:(develop) ✗ git fetch fd
+# git fetch sample-repo
 remote: Enumerating objects: 574, done.
 remote: Counting objects: 100% (275/275), done.
 remote: Compressing objects: 100% (153/153), done.
 remote: Total 574 (delta 166), reused 113 (delta 113), pack-reused 299
 오브젝트를 받는 중: 100% (574/574), 181.75 KiB | 468.00 KiB/s, 완료.
 델타를 알아내는 중: 100% (244/244), 로컬 오브젝트 56개 마침.
-https://bitbucket.org/okestrolab/flowerduet URL에서
- * [새로운 브랜치]     develop                             -> fd/develop
- * [새로운 브랜치]     feature-gtpark-웹소켓-20110125   -> fd/feature-gtpark-웹소켓-20110125
- * [새로운 브랜치]     hotfix-ndfass-메뉴안뜨는문제-210514 -> fd/hotfix-ndfass-메뉴안뜨는문제-210514
- * [새로운 브랜치]     master                              -> fd/master
- * [새로운 브랜치]     ndfass_master                       -> fd/ndfass_master
+https://github.com/GyujinAn/sample.git URL에서
+ * [새로운 브랜치]     develop                             -> sample-repo/develop
+ * [새로운 브랜치]     master                              -> sample-repo/master
 
 ```
 
@@ -65,31 +62,14 @@ https://bitbucket.org/okestrolab/flowerduet URL에서
 다른 원격저장소의 특정 브랜치를 나의 로컬 저장소의 특정 브런치로 merge시킨다.
 ```
 
-➜  flowerduet-test git:(develop) ✗ git merge fd/develop 
+# git merge sample-repo/develop 
 Merge made by the 'recursive' strategy.
- AdminApp/frontend/src/assets/css/default.css                                                           |    4 +-
- AdminApp/frontend/src/views/layout/main/MainSidenav.vue                                                |    8 +-
- DashboardApp/frontend/src/assets/css/style.css                                                         |   44 +-
- DashboardApp/frontend/src/assets/images/ic_check.svg                                                   |    3 +
- DashboardApp/frontend/src/assets/images/ic_check_on.svg                                                |    6 +
- DashboardApp/frontend/src/assets/images/wt/bg-tw-arr-h.png                                             |  Bin 1127 -> 1200 bytes
- DashboardApp/frontend/src/assets/images/wt/bg-tw-arr.png                                               |  Bin 1101 -> 1225 bytes
- DashboardApp/frontend/src/assets/images/wt/btn-minusw-h.png                                            |  Bin 975 -> 956 bytes
- DashboardApp/frontend/src/assets/images/wt/btn-minusw.png                                              |  Bin 975 -> 956 bytes
- DashboardApp/frontend/src/assets/images/wt/btn-plusw-h.png                                             |  Bin 1019 -> 978 bytes
- DashboardApp/frontend/src/assets/images/wt/btn-plusw.png                                               |  Bin 1014 -> 974 bytes
- DashboardApp/frontend/src/assets/images/wt/ic_check.svg                                                |    6 +
- DashboardApp/frontend/src/assets/images/wt/ic_check_on.svg                                             |    6 +
- DashboardApp/frontend/src/assets/images/wt/ic_del_b.svg                                                |   10 +
- DashboardApp/frontend/src/assets/images/wt/ic_del_bh.svg                                               |   10 +
- DashboardApp/frontend/src/assets/images/wt/ic_del_r.svg                                                |   10 +
- DashboardApp/frontend/src/assets/images/wt/ic_del_rh.svg                                               |   10 +
- DashboardApp/frontend/src/assets/images/wt/ic_edit_b.svg                                               |    6 +
- DashboardApp/frontend/src/assets/images/wt/ic_edit_bh.svg                                              |    6 +
- DashboardApp/frontend/src/assets/images/wt/ic_edit_r.svg                                               |    6 +
- DashboardApp/frontend/src/assets/images/wt/ic_edit_rh.svg                                              |    6 +
- DashboardApp/frontend/src/assets/images/wt/ic_loader.svg                                               |    3 +
- DashboardApp/frontend/src/components/element/chart/DmChart.vue                                         |  326 +++---
+ sample/frontend/src/assets/css/default.css                                                           |    4 +-
+ sample/frontend/src/views/layout/main/MainSidenav.vue                                                |    8 +-
+ sample/frontend/src/assets/css/style.css                                                         |   44 +-
+ sample/frontend/src/assets/images/ic_check.svg                                                   |    3 +
+ sample/frontend/src/assets/images/ic_check_on.svg                                                |    6 +
+ sample/frontend/src/assets/images/wt/bg-tw-arr-h.png                                             |  Bin 1127 -> 1200 bytes
 ...
 
 ```
@@ -100,7 +80,7 @@ merge 내역에 문제가 없다고 판단되면 merge 내역을 커밋한다.
 
 ```
 
-➜  flowerduet-test git:(develop) ✗ git commit -m "update"
+# git commit -m "update"
 [develop e4a5d59f] update
 
 ```
@@ -110,7 +90,7 @@ merge 내역에 문제가 없다고 판단되면 merge 내역을 커밋한다.
 로컬저장소에 다른 원격저장소의 업데이트 사항이 반영되었으므로 나의 원격저장소에 푸쉬한다.
 
 ```
-➜  flowerduet-test git:(develop) git push
+# git push
 오브젝트 나열하는 중: 382, 완료.
 오브젝트 개수 세는 중: 100% (269/269), 완료.
 Delta compression using up to 8 threads
@@ -119,10 +99,6 @@ Delta compression using up to 8 threads
 Total 195 (delta 109), reused 129 (delta 56), pack-reused 0
 remote: Resolving deltas: 100% (109/109), completed with 41 local objects.
 remote: 
-remote: Create pull request for develop:
-remote:   https://bitbucket.org/okestrolab/flowerduet-test/pull-requests/new?source=develop&t=1
-remote: 
-To https://bitbucket.org/okestrolab/flowerduet-test.git
-   540968f4..e4a5d59f  develop -> develop
+...
 
 ```

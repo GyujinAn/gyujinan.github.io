@@ -11,9 +11,11 @@ categories: git
 
 * 로컬 pc에 git이 설치되어 있다.
 
-* 타 원격 저장소의 주소를 https://gyujinan@bitbucket.org/okestrolab/a-repo.git라고 정의한다.
+* 원격 저장소는 bitbucket이라고 가정한다.
 
-* 나의 원격 저장소의 주소를 https://gyujinan@bitbucket.org/okestrolab/my-repo.git라고 정의한다.
+* 타 원격 저장소의 주소를 https://gyujinan@bitbucket.org/okestrolab/a-repo.git라고 가정한다.
+
+* 나의 원격 저장소의 주소를 https://gyujinan@bitbucket.org/okestrolab/my-repo.git라고 가정한다.
 
 
 

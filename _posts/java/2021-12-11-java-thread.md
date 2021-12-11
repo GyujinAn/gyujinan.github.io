@@ -369,7 +369,7 @@ Process finished with exit code 0
 public final void setDaemon(boolean on) {
     checkAccess();
     if (isAlive()) {
-        throw new IllegalThreadStateException();
+        throw new IllegalThreadStateException(); <-- IllegalThreadStateException을 발생
     }
     daemon = on;
 }

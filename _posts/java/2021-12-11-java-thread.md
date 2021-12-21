@@ -495,4 +495,57 @@ public static void sleep(long millis, int nanos)
 
 ```
 
+6.4 interrupt()와 interrupted() 
+
+보통 Runnable의 run()을 구현 할 때, 
+```
+    public void run(){
+        while(!interrupted()){
+
+        }
+    }
+```
+와 같은 구조로 구현된다. interrupted상태(interrupted상태를 나타내는 인스턴스 변수는 Thread 클래스의 필드로 존재하지는 않는다.) 변수를 통해서 run()구현체를 컨트롤 한다. 
+
+interrupted상태를 컨트롤 하기 위해 세가지 메소드가 존재한다.
+
+1) public void interrupt()
+
+2) public static boolean interrupted()
+
+3) public boolean isInterrupted()
+
+interrupt()는 interrupted상태를 false에서 true로 변경한다. 그러면 run() 메소드 안에서 무한루프를 탈출함으로써 쓰레드를 종료시킨다. 만약 쓰레드가 RUNNABLE상태가 아니라 sleep(), wait(), join()에 의한 WAITING 혹은 TIMED_WAITING 상태라면 해당 메소드에서 InterruptedException을 발생시키고 RUNNABLE상태로 바뀐다. 마찬가지로 interrupted상태를 false에서 true로 변경되니 무한루프를 탈출하고 쓰레드가 종료된다.
+
+interrupted()는 while문의 조건으로 사용된다. interrupted상태 값을 반환한다. 상태 값이 false면 무한루프를 유지시킨다. 그리고 true이면 무한루프를 탈출 하고  interrupted상태 값 false로 초기화 한다. interrupted상태 값이 초기화 되었으므로 새로운 쓰레드를 통해서 다시 실행 할 수 있을 것이다.
+
+isInterrupted()는 interrupted()와 같지만 interrupted상태 값의 초기화가 이루어지지 않는다.
+
+6.5 yield()
+
+무한루프를 통해서 run()을 구현하다보면 실제로 작업이 이루어지지 않고 의미 없는 루프를 도는 경우가 발생한다. 이러한 상황을 바쁜 대기상태(busy-waiting)라고 한다. 이러한 상황의 쓰레드가 존재한다면 Thread.yield()를 통해서 해당 쓰레드가 할당받은 시간을 대기하고 있는 쓰레드에게 양보하고 자신은 실행대기상태로 돌아갈 수 있다. 
+
+예를 들면
+```
+while(!interrupted()){
+    if(flag){
+
+    }
+}
+```
+위와 같이 flag를 통해서 루프를 컨트롤 할 수 있는 상황에서 flag값이 false인 경우 바쁜 대기상태(busy-waiting)가 되어 쓸데없이 자원을 사용하게 된다. 
+
+이런 경우
+
+```
+while(!interrupted()){
+    if(flag){
+
+    }else{
+        Thread.yield();
+    }
+}
+```
+Thread.yield()를 호출하여 해당 쓰레드가 할당받은 시간을 다른쓰레드에게 양보하면 더욱 효율적으로 cpu 자원을 활용 할 수 있을 것이다.
+
 

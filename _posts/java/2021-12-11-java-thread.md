@@ -374,3 +374,125 @@ public final void setDaemon(boolean on) {
     daemon = on;
 }
 ```
+
+
+### 6. thread 생명주기
+
+6.1 쓰레드 상태
+
+thread는 NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED와 같은 상태 값을 가지며 그 상태에 따른 생명주기를 가지고 있다. 
+
+1) NEW : 쓰레드가 생성되고 아직 start()가 호출되지 않은 상태
+2) RUNNABLE : 쓰레드가 실행 중이거나 실행 가능한 상태
+3) BLOCKED : 동기화에 의해서 LOCK이 풀릴 때까지 기다리고 있는 상태
+4) WATING, TIMED_WAITING : 쓰레드가 종료되지는 않았지만 실행가능하지 않은 일시정시 상태, TIMED_WAITING은 일정 시간 동안 일시정지인 상태이다.
+5) TERMINATED : 쓰레드가 종료 된 상태
+
+이러한 상태는 Thread 클래스의 enum State를 통해 알 수 있다.
+
+```
+
+public
+class Thread implements Runnable {
+...
+
+    public enum State {
+        /**
+         * Thread state for a thread which has not yet started.
+         */
+        NEW,
+
+        /**
+         * Thread state for a runnable thread.  A thread in the runnable
+         * state is executing in the Java virtual machine but it may
+         * be waiting for other resources from the operating system
+         * such as processor.
+         */
+        RUNNABLE,
+
+        /**
+         * Thread state for a thread blocked waiting for a monitor lock.
+         * A thread in the blocked state is waiting for a monitor lock
+         * to enter a synchronized block/method or
+         * reenter a synchronized block/method after calling
+         * {@link Object#wait() Object.wait}.
+         */
+        BLOCKED,
+
+        /**
+         * Thread state for a waiting thread.
+         * A thread is in the waiting state due to calling one of the
+         * following methods:
+         * <ul>
+         *   <li>{@link Object#wait() Object.wait} with no timeout</li>
+         *   <li>{@link #join() Thread.join} with no timeout</li>
+         *   <li>{@link LockSupport#park() LockSupport.park}</li>
+         * </ul>
+         *
+         * <p>A thread in the waiting state is waiting for another thread to
+         * perform a particular action.
+         *
+         * For example, a thread that has called <tt>Object.wait()</tt>
+         * on an object is waiting for another thread to call
+         * <tt>Object.notify()</tt> or <tt>Object.notifyAll()</tt> on
+         * that object. A thread that has called <tt>Thread.join()</tt>
+         * is waiting for a specified thread to terminate.
+         */
+        WAITING,
+
+        /**
+         * Thread state for a waiting thread with a specified waiting time.
+         * A thread is in the timed waiting state due to calling one of
+         * the following methods with a specified positive waiting time:
+         * <ul>
+         *   <li>{@link #sleep Thread.sleep}</li>
+         *   <li>{@link Object#wait(long) Object.wait} with timeout</li>
+         *   <li>{@link #join(long) Thread.join} with timeout</li>
+         *   <li>{@link LockSupport#parkNanos LockSupport.parkNanos}</li>
+         *   <li>{@link LockSupport#parkUntil LockSupport.parkUntil}</li>
+         * </ul>
+         */
+        TIMED_WAITING,
+
+        /**
+         * Thread state for a terminated thread.
+         * The thread has completed execution.
+         */
+        TERMINATED;
+    }
+...
+}
+
+```
+
+![thread 생명주기](/public/images/java-thread-01.png)
+
+6.2 쓰레드 생명주기 순서
+
+1) 쓰레드가 생성되고 나면 기본적으로 NEW 상태로 생성된다.
+
+2) NEW 상태인 쓰레드의 start()가 호출되면 쓰레드는 RUNNABLE 상태로 변경되고 큐(Queue)에서 스케줄러에게 실행시간을 할당받기를 기다린다.
+
+3) 큐에서 자신의 차례를 기다리는 쓰레드는 자신의 차례가 되면 실행시간을 할당받아서 작업을 처리한다. 실행 중인 상태도 RUNNABLE 상태이다.
+
+4) 실행 중에 yield()를 만나게 되면 큐의 가장 뒷자리로 이동하여 다시 실행대기상태가 된다. 그리고 할당받은 실행시간은 다음쓰레드가 사용하게 된다.
+
+5) 또 실행 중에 wait(), suspend(), sleep()를 만나게 되면 쓰레드는 WAITING, TIMED_WAITING 상태가 되고 일시정지 상태가 된다.
+
+6) 일시정지 상태의 쓰레드가 resume(), notify(), interrupt()와 같은 메소드를 만나면 다시 RUNNABLE 상태로 돌아가 실행대기상태가 된다.
+
+7) 위와 같은 cycle을 반복하다. 작업을 모두 처리하거나 stop()을 만나면 상태는 TERMINATED로 변경되고 쓰레드는 소멸된다. 
+
+6.3 sleep(long millis) 
+
+sleep()을 호출한 쓰레드는 WAITING 상태로 일시정지된다. 참고로 sleep이 호출된 쓰레드가 아닌 sleep()가 올라간 호출 스택의 쓰레드가 일시 정지 된다. 그래서 sleep 메소드는 static으로 지원된다. 일시정지 상태에서 지정된 시간이 지나거나 해당 쓰레드의 interrupt()가 호출되면 sleep()메소드는  InterruptedException를 발생시키고 일시정지 상태에서 깨어나 실행되기 상태가 된다.
+
+```
+
+public static native void sleep(long millis) throws InterruptedException; // native method라서 실제 method body를 확인 할 수 없다.
+
+public static void sleep(long millis, int nanos)
+
+```
+
+

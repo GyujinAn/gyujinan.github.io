@@ -7,7 +7,6 @@ categories: java
 
 <!-- # chapter13 쓰레드 thread-->
 
-
 ## 학습목표
 
 자바 프로그램에서 왜 멀티 쓰레드를 사용하는지 이해하고 쓰레드를 관리하기 위한 여러 사용법을 익힌다.
@@ -602,3 +601,16 @@ synchronized(객체의 참조변수){
 3) notifyAll(): 기본적으로 notify()와 같지만 임의의 쓰레드에게 실행통지를 보내는 것이 아니라, 모든 쓰레드에게 통지를 보낸다. 해당 객체의 waiting pool에 있는 모든 쓰레드는 lock을 획득하게 하기 위해 경쟁한다. 이 경쟁 상태를 race condition이라고 한다.
 
 
+7.4 volatile 
+
+<!-- volatile는 컴퓨팅(cs)에 대한 이해가 없어서 잘 이해가 안됨 나중에 복습하기 p787-->
+
+멀티 코어 프로세스에서는 여러 cpu의 cash에 memory의 data를 저장하여 사용하기 때문에 memory에 저장 된 instance 변수가 동기화 되지 않는 상황이 발생 할 수 있다. 이러한 상황을 대비해 개발자는 volatile를 사용 할 수 있다. 변수 앞에 volatile을 붙이면 cpu가 변수값을 읽어 올 때, cash가 아닌 메모리에서 data를 읽어온다.
+
+추가적으로 synchronized 블록에서 접근하는 변수는 volatile를 사용하지 않아도 된다. 왜냐하면 synchronized 블록을 들어갈 때와 나올 때 캐쉬 메모리 간의 동기화가 이루어지기 때문이다. 
+
+![thread 생명주기](/public/images/java-thread-02.png)
+
+
+
+<!-- Lock, Condition 그리고 fork & join에 대해서 알 필요성이 생길 때 정리하기 -->

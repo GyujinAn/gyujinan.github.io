@@ -199,7 +199,7 @@ passCount: 6, compareCount: 21, swapCount: 8
 ===array2 after bubbleSort0===
 1 3 4 6 7 8 9 
 
-===array3 before bubbleSort3===
+===array3 before bubbleSort1===
 6 4 3 7 1 9 8 
 ---pass0---
 4 3 6 1 7 8 9 
@@ -214,7 +214,7 @@ passCount: 6, compareCount: 21, swapCount: 8
 ---pass5---
 1 3 4 6 7 8 9 
 passCount: 6, compareCount: 21, swapCount: 8
-===array3 after bubbleSort3===
+===array3 after bubbleSort1===
 1 3 4 6 7 8 9 
 
 ```
@@ -242,3 +242,134 @@ T(n) = 0.5 *(n^2 - n)
 빅오표기법으로는 O(n^2)이다
 
 ```
+
+## 버블정렬 업그레이드 1
+
+버블 정렬의 패스 도중에 교환이 한번도 발생하지 않는다면 해당 배열은 정렬이 이미 완료되었다고 할 수 있다. 에를 들어 배열이 1,3,4,6,7,8,9로 구성되었다고 해보자. 해당 배열에서 버블 정렬을 실행시키면 첫번째 패스부터 교환은 한번도 발생하지 않을 것이다. 하지만 패스 n-1번 즉 6번 발생한다. 불필요한 패스가 발생한 것이다. 패스 도중 교환이 발생하지 않았음을 기록하여 불필요한 패스에 대한 비용을 줄일수 있다.
+```
+class Main {
+
+    //가장 작은 수를 앞으로 옮기는 pass로 구성 된 버블 정렬
+    //교환이 발생하지 않은 경우는 정렬이 완료되었으므로 정렬을 종료시키는 업그레이드 버전
+    private static int[] upgradedBubbleSort0(int[] a, int n){
+        int passCount = 0;
+        int swapCount = 0;
+        int compareCount = 0;
+        for(int j=0; j<n-1; j++){
+            System.out.println("---"+"pass"+passCount+"---");
+            boolean isSwap = false;
+            for(int i=n-1; i>j; i--){
+                if(a[i] <  a[i-1]){
+                    swap(a, i, i-1);
+                    swapCount++;
+                    isSwap = true;
+                }
+                compareCount++;
+
+            }
+            printArray(a);
+            passCount++;
+            if(!isSwap) break;
+        }
+        System.out.println("passCount: " + passCount + ", compareCount: " + compareCount + ", swapCount: " + swapCount);
+        return a;
+    }
+
+    //가장 큰 수를 뒤로 옮기는 pass로 구성 된 버블 정렬
+    //교환이 발생하지 않은 경우는 정렬이 완료되었으므로 정렬을 종료시키는 업그레이드 버전
+    private static int[] upgradedBubbleSort1(int[] a, int n){
+        int passCount = 0;
+        int swapCount = 0;
+        int compareCount = 0;
+        for(int j=n-1; j>0; j--){
+            System.out.println("---"+"pass"+passCount+"---");
+            boolean isSwap = false;
+            for(int i=0; i<j; i++){
+                if(a[i] > a[i+1]){
+                    swap(a, i, i+1);
+                    swapCount++;
+                    isSwap = true;
+                }
+                compareCount++;
+            }
+            printArray(a);
+            passCount++;
+            if(!isSwap) break;
+        }
+        System.out.println("passCount: " + passCount + ", compareCount: " + compareCount + ", swapCount: " + swapCount);
+        return a;
+    }
+
+
+    private static void printArray(int[] a){
+        for(int tmp : a){
+            System.out.print(tmp+" ");
+        }
+        System.out.println();
+    }
+
+    private static void swap(int a[], int i0, int i1){
+        int tmp = a[i0];
+        a[i0] = a[i1];
+        a[i1] = tmp;
+    }
+
+    public static void main(String[] args) {
+
+        int[] array;
+
+        array = new int[]{6, 4, 3, 7, 1, 9, 8};
+        System.out.println("===array4 before upgradedBubbleSort0===");
+        printArray(array);
+        upgradedBubbleSort0(array, array.length);
+        System.out.println("===array4 after upgradedBubbleSort0===");
+        printArray(array);
+
+        System.out.println();
+
+        array = new int[]{6, 4, 3, 7, 1, 9, 8};
+        System.out.println("===array5 before upgradedBubbleSort1===");
+        printArray(array);
+        upgradedBubbleSort1(array, array.length);
+        System.out.println("===array5 after upgradedBubbleSort1===");
+        printArray(array);
+
+    }
+
+}
+
+-----출력 결과-----
+
+===array4 before upgradedBubbleSort0===
+6 4 3 7 1 9 8 
+---pass0---
+1 6 4 3 7 8 9 
+---pass1---
+1 3 6 4 7 8 9 
+---pass2---
+1 3 4 6 7 8 9 
+---pass3---
+1 3 4 6 7 8 9 
+passCount: 4, compareCount: 18, swapCount: 8
+===array4 after upgradedBubbleSort0===
+1 3 4 6 7 8 9 
+
+===array5 before upgradedBubbleSort1===
+6 4 3 7 1 9 8 
+---pass0---
+4 3 6 1 7 8 9 
+---pass1---
+3 4 1 6 7 8 9 
+---pass2---
+3 1 4 6 7 8 9 
+---pass3---
+1 3 4 6 7 8 9 
+---pass4---
+1 3 4 6 7 8 9 
+passCount: 5, compareCount: 20, swapCount: 8
+===array5 after upgradedBubbleSort1===
+1 3 4 6 7 8 9 
+
+```
+
+위의 실행 결과를 보면 bubbleSort0의 패스는 6회이지만 upgradedBubbleSort0은 4회 발생하였고 bubbleSort1의 패스는 6회 발생하였지만 upgradedBubbleSort0은 5회 발생하였다. 결과 시간복잡도는 개선되었다. (하지만 빅오표기법으로는 최악의 상황을 가정하기에 빅오표기법의 시간복잡도는 이전과 같다.)

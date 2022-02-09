@@ -33,7 +33,7 @@ categories: java
 
 추가적으로 상속을 통한 방법은 Thread 클래스의 메소드를 상속 받았기 때문에 run()메소들에서 Thread클래스의 메소드에 접근 할 수 있지만 Runnable 인터페이스를 구현하는 방법에서는 Thread 메소드를 바로 접근 할 수가 없다. Thread의 메소드에 접근하기 위해서는 Thread.currentThread() 통해서 Thread에 대한 참조를 얻은 후에 접근 할 수 있다.
 
-```
+```java
 //Thread 클래스를 상속하여 구현
 class ThreadEX_1 extends Thread{
 
@@ -48,7 +48,7 @@ class ThreadEX_1 extends Thread{
 }
 ```
 
-```
+```java
 //Runnable 인터페이스를 구현
 class ThreadEX_2 implements Runnable{
 
@@ -69,7 +69,7 @@ class ThreadEX_2 implements Runnable{
 
 구현법이 다른 만큼 그에 따른 쓰레드 객체 생성법 또한 다르다. 상속을 통한 방법은 new Class명으로 쓰레드 인스턴스를 생성해주면 되지만 전력패턴으로 되어있는 Runnable 인테페이스 구현은 Thread 인스턴스를 생성 할 때 생성자를 파라미터를 통해서 전략클래스의 참조를 넘겨주어야 한다.
 
-```
+```java
 public class ThreadMain{
     public static void main(String[] args) {
         
@@ -87,7 +87,7 @@ public class ThreadMain{
 
 쓰레드의 실행은 실제 os의 쓰레드 생성 및 호출스택 할당과 같은 초기화 단계를 실행하기 위해 구현 된 run()메소드 호출을 통해서가 아닌 start()메소드를 호출을 통해서 한다. 그리고 쓰레드는 한번만 실행되고 두번 실행될 수 없다. (그 이유는 잘 모르겠다.) start()가 두번 호출 될 수 없고 만약 두번 호출 된다면 IllegalThreadStateException를 발생시킨다. 
 
-```
+```java
 public synchronized void start() {
     /**
         * This method is not invoked for the main method thread or "system"
@@ -117,7 +117,7 @@ public synchronized void start() {
 
 
 ※ start() 메소드에서 쓰레드 생성 및 호출 스택이 일어나지 않고 start0()라고 하는 네이티브 메소드를 통해서 생성된다.
-```
+```java
     public synchronized void start() {
         /**
          * This method is not invoked for the main method thread or "system"
@@ -157,7 +157,7 @@ public synchronized void start() {
 
 Thread 클래스에는 priority라는 필드가 존재한다. 해당 필드는 cpu 할당시간의 우선순위를 나타낸다. 숫자가 높으면 높을 수록 cpu에 대한 시간을 다른 쓰레드에 비해 많이 받을 수 있다. 그리고 쓰레드가 생성되면 쓰레드를 생성한 쓰레드의 우선순위를 상속받는다. 우선순위에 대한 쓰레드 메소드는 두개가 존재한다.
 
-```
+```java
 public final void setPriority(int newPriority)
 
 public final int getPriority()
@@ -181,7 +181,7 @@ void uncaughtException(Thread t, Throwable e) -->
 4.2 jvm의 쓰레드 그룹
 jvm은 자바 프로그램을 실행하면서 main과 system이라는 쓰레드 그룹을 생성하여 필요한 쓰레드 그룹 안에 생성하는데, gc를 수행하는 Finalizer 쓰레드 등등은 system 그룹에 포함시키고 main 쓰레드 등등은 main 그룹에 포함시킨다. 그리고 개발자들이 생성한 쓰레드와 쓰레드 그룹은 main 그룹 혹은 main그룹의 하위 그룹으로 생성된다. Thread.getAllStackTraces()를 호출에 jvm이 생성한 쓰레드 그룹을 확인 할 수 있다.
 
-```
+```java
 
 public class ThreadEx{
     public static void main(String[] args) {
@@ -257,7 +257,7 @@ public class ThreadEx{
 
 쓰레드 그룹들은 컴포넌트 패턴으로 설계 되었기 때문에 상위 쓰레드 그룹의 속성을 설정하면 자동으로 하위그룹의 속성들을 설정해준다. 그러므로 하위 그룹을 한번의 설정으로 하위그룹까지 간편하게 관리 할 수 있다. 예를 들어 ThreadGroup의 setMaxPriority()를 통해서 최대 우선 순위 값을 설정하면 쓰레드 그룹의 하위 그룹의 maxPriority 값은 자동으로 수정된다. 
 
-```
+```java
 public
 class ThreadGroup implements Thread.UncaughtExceptionHandler {
 ...
@@ -300,7 +300,7 @@ public final void setMaxPriority(int pri) {
 
 
 
-```
+```java
 public class ThreadEx{
     public static void main(String[] args) {
         Map map = Thread.getAllStackTraces();
@@ -364,7 +364,7 @@ Process finished with exit code 0
 개발자가 데몬 쓰레드를 만들고 싶은 경우는 Thread 클래스의 setDaemon(boolean on) 메소드를 호출하여 true값을 넘겨주면 된다. setDaemon()은 start() 전에 호출 되어야 하므로 start()가 호출된 후 호출되면 IllegalThreadStateException을 발생시킨다.
 
 <!-- 대몬쓰레드의 예시를 하나 만들어보면 좋겠다 -->
-```
+```java
 public final void setDaemon(boolean on) {
     checkAccess();
     if (isAlive()) {
@@ -389,7 +389,7 @@ thread는 NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, TERMINATED와 같은 �
 
 이러한 상태는 Thread 클래스의 enum State를 통해 알 수 있다.
 
-```
+```java
 
 public
 class Thread implements Runnable {
@@ -486,18 +486,16 @@ class Thread implements Runnable {
 
 sleep()을 호출한 쓰레드는 WAITING 상태로 일시정지된다. 참고로 sleep이 호출된 쓰레드가 아닌 sleep()가 올라간 호출 스택의 쓰레드가 일시 정지 된다. 그래서 sleep 메소드는 static으로 지원된다. 일시정지 상태에서 지정된 시간이 지나거나 해당 쓰레드의 interrupt()가 호출되면 sleep()메소드는  InterruptedException를 발생시키고 일시정지 상태에서 깨어나 실행되기 상태가 된다.
 
-```
-
+```java
 public static native void sleep(long millis) throws InterruptedException; // native method라서 실제 method body를 확인 할 수 없다.
 
 public static void sleep(long millis, int nanos)
-
 ```
 
 6.4 interrupt()와 interrupted() 
 
 보통 Runnable의 run()을 구현 할 때, 
-```
+```java
     public void run(){
         while(!interrupted()){
 
@@ -525,7 +523,7 @@ isInterrupted()는 interrupted()와 같지만 interrupted상태 값의 초기화
 무한루프를 통해서 run()을 구현하다보면 실제로 작업이 이루어지지 않고 의미 없는 루프를 도는 경우가 발생한다. 이러한 상황을 바쁜 대기상태(busy-waiting)라고 한다. 이러한 상황의 쓰레드가 존재한다면 Thread.yield()를 통해서 해당 쓰레드가 할당받은 시간을 대기하고 있는 쓰레드에게 양보하고 자신은 실행대기상태로 돌아갈 수 있다. 
 
 예를 들면
-```
+```java
 while(!interrupted()){
     if(flag){
 
@@ -536,7 +534,7 @@ while(!interrupted()){
 
 이런 경우
 
-```
+```java
 while(!interrupted()){
     if(flag){
 
@@ -553,7 +551,7 @@ Thread.yield()를 호출하여 해당 쓰레드가 할당받은 시간을 다른
 join()은 어떤 쓰레드가 특정 쓰레드의 작업을 기다릴 필요가 있을때 사용된다. 파마미터를 통해 시간을 정해주면 해당 파라미터 시간 만큼 특정 쓰레드가 실행되도록 기다려준다. 
 
 예를 들면
-```
+```java
     public static void main(String[] args) {
 
         Thread th1 = new Thread();
@@ -573,7 +571,7 @@ join()은 어떤 쓰레드가 특정 쓰레드의 작업을 기다릴 필요가 
 synchronized 키워드를 통해서 임계 영역을 설정 할 수 있는데 방법은 크게 두가지이다. 참고로 임계영역은 코드영역에 설정하는 것이므로 클래스의 필드가 private이 아닌 public인 경우 다른 쓰레드에 의해서 임의로 접근되서 수정이 발생 할 수 있다.
 
 1) 메서드 전체를 임계 영역으로 설정하는 방법
-```
+```java
 public synchronized void exam(){
 
 }
@@ -582,7 +580,7 @@ public synchronized void exam(){
 
 
 2) 특정 영역을 임계 영역으로 지정
-```
+```java
 synchronized(객체의 참조변수){
 
 }

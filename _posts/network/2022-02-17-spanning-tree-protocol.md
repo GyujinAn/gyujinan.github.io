@@ -57,7 +57,7 @@ Root Path Cost 브리지가 루트 브리지까지 가는 Path Cost를 의미한
 
  2) Non Root Bridge(루트 브리지가 아닌 브리지)당 하나의 루트 포트를 선정한다.
 
- 3) 세그먼트(브리지와 브리지의 링크) 데지그네이트(designated) 포트를 선정한다.
+ 3) 세그먼트(브리지와 브리지의 링크)당 하나의 데지그네이트(designated) 포트를 선정한다.
 
  세 단계의 작업이 완료되면 브로드캐스트의 브리지들은 루트 포트와 데지그네이트 포트를 통해서만 통신하게 된다. 두 종류의 포트를 통해서만 통신하게 되면 브로드캐스트의 구조는 트리형태가 된다. 아래의 내용을 통해 각 단계를 구체적으로 알아본다.
 
@@ -71,7 +71,14 @@ Root Path Cost 브리지가 루트 브리지까지 가는 Path Cost를 의미한
 
 루트 브리지가 선정 된 후에는 Non Root Bridge에서 루트 포트를 선정해야된다. 그 전에 브리지의 Root Path Cost를 산출해야된다. 루트 브리지의 Root Path Cost는 0이고 Not Root Bridge의 Root Path Cost는 각 포트가 받는 BPDU의 Root Path Cost와 포트의 Path Cost의 합 중에 가장 작은 값으로 산출된다. Non Root Bridge의 Root Path Cost가 산출되면 Non Root Bridge의 각 포트에서 받은 BPDU의 Root Path Cost와 자신의 BPDU의 Root Path Cost 합하여 가장 작은 값을 가진 포트를 루트 포트로 선정한다.
 
- ### 4.3 세그먼트(브리지와 브리지의 링크) 데지그네이트(designated) 포트를 선정한다.
+<!-- 여기서 부터 다시 정리하기 -->
+
+ ### 4.3 세그먼트(브리지와 브리지의 링크)당 하나의 데지그네이트(designated) 포트를 선정한다.
+
+ 세그먼트에서 Root Path Cost가 가장 적은 포트르 데지그네이트 포트로 선정한다.
+
+ 
+ 
 
  
 

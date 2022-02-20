@@ -21,12 +21,32 @@ categories: network
 
  1) Root BID
 
-BID(Brige ID)란 브리지의 정체성을 나타내는 숫자들의 조합니다. BID는 8바이트로 이루어져 있는데 그 중 2바이트는 브리지 우선순위(Brige Priority)와 6바이트의 맥 어드레스로 구성되어져 있다. 브리지 우선순위와 맥어드레스를 통해 어떤 기능을 하는지는 추후에 다루어보기로 한다. 트리에 루트가 존재하는 것 처럼 스패닝 트리 형태에서는 루트 브리지가 존재하는데 Root BID는 루트 브리지의 BID를 나타낸다.
+BID(Brige ID)란 브리지의 정체성을 나타내는 두가지 숫자들의 조합니다. BID는 8바이트로 이루어져 있는데 그 중 2바이트는 브리지 우선순위(Brige Priority)와 6바이트의 맥 어드레스로 구성되어져 있다. 브리지 우선순위와 맥어드레스를 통해 어떤 기능을 하는지는 추후에 다루어보기로 한다. 트리에 루트가 존재하는 것 처럼 스패닝 트리 형태에서는 루트 브리지가 존재하는데 Root BID는 루트 브리지의 BID를 나타낸다.
 
  2) Root Path Cost
 
- Path Cost란
+Path Cost란 브리지에서 다른 브리지로 가는 길에 대한 통신비용을 의미한다. 원래 스패닝 트리 프로토콜을 정의하는 IEEE 802.10에는 Path Cost를 구하는 방법이 정의되어 있었다. 1000Mbps를 두 장비 사이의 링크 대역폭으로 나눈 값을 Path Cost라 하였다. 예를 들어 두 장비 사이의 링크 대역폭이 100Mbps라면 이에 대한 Path Cost는 100(1000/100)이였다. 하지만 기술의 발전에 따라 링크 대역폭에 높아졌고 그에 따라 Path Cost값에 소수점이 등장하게 되었다. 소수점에 대한 불편함을 없애기 위해서 IEEE(Institute of Electrical and Electronics Engineers)에서 링크 대역폭에 따른 Path Cost를 표로 아래와 같이 정의해놓았다. 
+
+|Bandwidth(대역폭)|STP Cost(Path Cost)
+|---|---|
+|4Mbps|250|
+|10Mbps|100|
+|16Mbps|62|
+|45Mbps|39|
+|100Mbps|19|
+|155Mbps|14|
+|622Mbps|6|
+|1Gbps|4|
+|10Gbps|2|
+
+Root Path Cost 루트 브리지가 아닌 브리지가 루트 브리지까지 가는 Path Cost를 의미한다. 
 
  3) Sender BID
 
+ BPDU를 보내는 브리지의 BID를 의미한다. 해당 BID로 BPDU를 받은 브리지는 어떤 브리지가 보내는지 알 수 있다.
+
  4) Port ID
+
+ BPDU가 나가는 브리지의 Port의 ID를 의미한다. 해당 Port ID로 BPDU를 받은 브리지는 보낸 브리지의 어떤 포트에서 데이터가 왔는지 알 수 있다.
+
+ 

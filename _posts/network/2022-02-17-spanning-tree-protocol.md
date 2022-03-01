@@ -19,11 +19,11 @@ categories: network
 
 브리지에 전원이 들어오게 되면 브리지는 스패닝 트리 형태를 구성하기 위해 자신과 연결 된 브리지들에게 2초에 한번씩 BPDU를 보낸다. BPDU의 구성은 아래와 같은 내용으로 되어있다.
 
-1) Root BID
+### 3.1 Root BID
 
 BID(Brige ID)란 브리지의 정체성을 나타내는 두 가지 숫자들의 조합니다. BID는 8바이트로 이루어져 있는데 그 중 2바이트는 브리지 우선순위(Brige Priority)와 6바이트의 맥 어드레스로 구성되어져 있다. 브리지 우선순위 값의 범위는 2바이트이므로 0부터 2^16-1까지이다. 그 중 디폴트 값은 중간값이다. 십진수로는 32768이다. 그리고 16진수와 2진수로는 8000, 1000 0000 0000 0000이다. 맥 어드레스는 이미 정해진 값으므로 따로 디폴트 값이 존재하지 않는다. 브리지 우선순위와 맥어드레스를 통해 어떤 기능을 하는지는 추후에 다루어보기로 한다. 트리에 루트가 존재하는 것 처럼 스패닝 트리 형태에서는 루트 브리지가 존재하는데 Root BID는 루트 브리지의 BID를 나타낸다. 브리지가 전원이 들어오면 자신을 루트라고 판단하기 때문에 전원 후 바로 보내는 BPDU의 Root BID는 자신의 BID를 보낸다. 
 
-2) Root Path Cost
+### 3.2 Root Path Cost
 
 Path Cost란 브리지에서 다른 브리지로 가는 길에 대한 통신비용을 의미한다. 원래 스패닝 트리 프로토콜을 정의하는 IEEE 802.10에는 Path Cost를 구하는 방법이 정의되어 있었다. 1000Mbps를 두 장비 사이의 링크 대역폭으로 나눈 값을 Path Cost라 하였다. 예를 들어 두 장비 사이의 링크 대역폭이 100Mbps라면 이에 대한 Path Cost는 100(1000/100)이였다. 하지만 기술의 발전에 따라 링크 대역폭에 높아졌고 그에 따라 Path Cost값에 소수점이 등장하게 되었다. 소수점에 대한 불편함을 없애기 위해서 IEEE(Institute of Electrical and Electronics Engineers)에서 링크 대역폭에 따른 Path Cost를 표로 아래와 같이 정의해놓았다. 
 
@@ -41,11 +41,11 @@ Path Cost란 브리지에서 다른 브리지로 가는 길에 대한 통신비�
 
 Root Path Cost 브리지가 루트 브리지까지 가는 Path Cost를 의미한다. 이 또한 브리지가 전원이 들어오면 자신을 루트라고 판단하여 전원 후 바로 보내는 BPDU의 Root Path Cost에는 0을 입력하여 보낸다.
 
-3) Sender BID
+### 3.3 Sender BID
 
 BPDU를 보내는 브리지의 BID를 의미한다. 해당 BID로 BPDU를 받은 브리지는 어떤 브리지가 보내는지 알 수 있다. 
 
-4) Port ID
+### 3.4 Port ID
 
 BPDU가 나가는 브리지의 Port의 ID를 의미한다. 해당 Port ID로 BPDU를 받은 브리지는 보낸 브리지의 어떤 포트에서 데이터가 왔는지 알 수 있다.
 
@@ -63,19 +63,49 @@ BPDU가 나가는 브리지의 Port의 ID를 의미한다. 해당 Port ID로 BPD
 
 ### 4.1 브로드캐스트 도메인당 하나의 루트 브리지를 선정한다.
 
-루트 브리지는 브리지들이 BPDU의 Root BID를 교환함으로써 선정되어지는데 브리지는 최초 자신의 BID를 Root BID로 입력하여 연결 된 브리지들에게 보낸다. Root BID를 받은 각각의 브리지들은 현재 자신의 Root BID와 받은 Root BID 중 어느 Root BID가 더 작은지 비교하여 작은 Root BID를 Root BID로 판단하여 저장한다. 그렇게 선정 루트 브리지는 자신에게 오는 BPDU의 Root BID가 자신의 BID보다 크면 무시하고 작으면 Root BID를 갱신한다. 그리고 루트 브리지가 아닌 브리지(Non Root Brige)들은 BPDU의 값을 루트 브리지가 아닌 브리지에게 보낸다.
+루트 브리지는 브리지들이 BPDU의 Root BID를 교환함으로써 선정되어지는데 브리지는 최초 자신의 BID를 Root BID로 입력하여 연결 된 브리지들에게 보낸다. Root BID를 받은 각각의 브리지들은 현재 자신의 Root BID와 받은 Root BID 중 어느 Root BID가 더 작은지 비교하여 작은 Root BID를 Root BID로 판단하여 저장한다. 그렇게 선정 된 루트 브리지는 자신에게 오는 BPDU의 Root BID가 자신의 BID보다 크면 무시하고 작으면 Root BID를 갱신한다. 그리고 루트 브리지가 아닌 브리지(Non Root Brige)들은 BPDU의 값을 루트 브리지가 아닌 브리지에게 보낸다.
 <br>
 이때 네트워크 관리자가 루트 브리지를 직접 선정해주고 싶은 경우 브리지 우선순위(Brige Priority)를 변경하여 BID값을 낮게 함으로써 루트 브리지는 직접 선정해 줄 수 있다.
 
 ### 4.2 Non Root Bridge(루트 브리지가 아닌 브리지)당 하나의 루트 포트를 선정한다.
 
-루트 브리지가 선정 된 후에는 Non Root Bridge에서 루트 포트를 선정해야된다. 그 전에 브리지의 Root Path Cost를 산출해야된다. 루트 브리지의 Root Path Cost는 0이고 Not Root Bridge의 Root Path Cost는 각 포트가 받는 BPDU의 Root Path Cost와 포트의 Path Cost의 합 중에 가장 작은 값으로 산출된다. Non Root Bridge의 Root Path Cost가 산출되면 Non Root Bridge의 각 포트에서 받은 BPDU의 Root Path Cost와 자신의 BPDU의 Root Path Cost 합하여 가장 작은 값을 가진 포트를 루트 포트로 선정한다.
-
-<!-- 여기서 부터 다시 정리하기 -->
+루트 브리지가 선정 된 후에는 Non Root Bridge에서 루트 포트를 선정해야되는데 그 전에 브리지의 Root Path Cost를 산출해야된다. 루트 브리지의 Root Path Cost는 0이고 Not Root Bridge의 Root Path Cost는 각 포트가 받는 BPDU의 Root Path Cost와 포트의 Path Cost의 합 중에 가장 작은 값으로 산출된다. Non Root Bridge의 Root Path Cost가 산출되면 Non Root Bridge의 각 포트에서 받은 BPDU의 Root Path Cost와 자신의 BPDU의 Root Path Cost 합하여 가장 작은 값을 가진 포트를 루트 포트로 선정한다.
 
 ### 4.3 세그먼트(브리지와 브리지의 링크)당 하나의 데지그네이트(designated) 포트를 선정한다.
 
-세그먼트에서 Root Path Cost가 가장 적은 포트르 데지그네이트 포트로 선정한다.
+루트 포트를 선정하면 남은 포트들 중에 데지그네이트 포트를 선정해야한다. 데지그네이트 포트는 세그먼트에서 Root Path Cost가 가장 적은 포트르 데지그네이트 포트로 선정한다. 이런 방법으로 데지그네이트 포트를 선정해보면 루트 브리지의 모든 포트가 데지그네이트 포트가 된다는 걸 알 수 있다. 왜냐하면 루트 브리지에는 루트 포트가 존재하지 않으며 루트브리지의 모든 포트의 Root Path Cost는 0이기 때문이다. 만약 세그먼트의 포트들의 Root Path Cost가 같다면 각 포트의 브리지 ID(Sender BID)중 더 작은 값을 가지는 포트를 데지그네이트 포트로 선정한다. 그리고 루트 포트도 데지그네이트 포트도 아닌 포트는 Non Designated 포트라고 한다.
+<br>
+위와 같이 세 단계가 완료되면 도메인의 브리지들은 루트 포트와 데지그네이트 포트를 통해서면 통신을 하게되고 이는 트리형태를 띄게된다. 통신하는 세그먼트에 장애가 발생하면 스패닝 트리 알고리즘이 다시 트리형태를 재조정하여 통신이 유지되도록 한다.
+
+## 5. 스패닝 트리 프로토콜의 5가지 상태
+
+스패닝 트리 프로토콜을 통해 브리지들이 구성되면 브리지들의 각 포트는 자신의 역할에 따라 5가지의 상태 중 하나의 상태를 가진다.
+
+### 5.1 Disabled
+
+네트워크 관리자가 포트를 shutdown시켜놓은 상태이다. 통신자체가 불가능하므로 BPDU를 주고 받을 수 없다. 물론 맥어드레스 배울 수 없다.
+
+### 5.2 Blocking
+
+네트워크관리자에 의해 Disabled로부터 해방되었거나 브리지가 처음 PowerOn되었을 때의 상태이다. 통신은 가능한 상태로 해당 상태에서는 BPDU를 주고 받으므로 스패닝 트리 프로토콜이 작동한다. 하지만 Blocking상태으므로 맥어드레스를 배울 수는 없다. 그러므로 해당상태는 브리지들이 트리형태를 구성하기 위한 상태이다.
+
+### 5.3 Listening
+
+Blocking 상태에서 스패닝 트리 알고리즘이 완료되면 상태가 Listening상태로 변경된다. 해당상태는 현재 트리형태의 구성변경이 없는지 확인하는 상태이다. 디폴트로 15초(Forwording Delay)를 유지하는데 15초가 지나면 더 이상 트리의 구성이 바뀌지 않을 것이라는 것을 암시한다.
+
+### 5.4 Learning
+
+Listening상태에서 15초가 유지되면 Learning상태로 보내는데 이때 브리지가 자신의 기능을 하기 위한 맥 어드레스 배워(Learning) 테이블을 생성하는 상태이다. 그리고 Learning 상태에서도 Listening상태와 같이 트리의 구성이 바뀌지 않을 것이라는 것을 암시하기 위해 15초를 유지하고 다음 상태로 바뀌게 된다. 즉 스패닝 트리 알고리즘이 완료된 후 마지막 상태인 Forwarding상태까지 가기 위해서는 Listening의 Forwording Delay와 Learning의 Forwording Delay가 지나야 된다.(디폴트인 경우 15초 + 15초 = 30초이다.)
+
+### 5.5 Forwarding
+
+Forwarding 상태까지 오게되면 프레임 데이터를 통신할 수 있게 된다. 그리고 해당상태에서도 맥어드레스 Learning은 계속되고 BPDU를 서로 주고 받으면서 트리 구성에 변경이 발생될지 안 될지 체크한다. 만약 트리의 구성에 변경이 발생하면 상태는 Blocking상태로 돌아가 다시 스패닝 트리 알고리즘을 실행하고 Forwarding 상태까지 돌아오게 된다.
+
+
+
+
+
+
 
 
 

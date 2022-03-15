@@ -2,7 +2,7 @@
 layout: post
 title: "디자인 패턴이란 무엇인가?"
 date: 2022-03-12
-categories: "design pattern"
+categories: DesignPattern
 ---
 
 # 디자인 패턴이란 무엇인가?

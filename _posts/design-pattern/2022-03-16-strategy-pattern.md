@@ -99,7 +99,7 @@ public class Main {
 
 ```
 위의 실행 과정을 보면 케빈듀란트는 상황에 따라 동적으로 적절한 공격전략을 선택하여 실행하는 것을 알 수 있다.
-위의 모든 코드는 [여기](https://github.com/GyujinAn/design-patterns/tree/main/src/strategy)에 저장되어있다.
+위의 모든 코드는 [여기](https://github.com/GyujinAn/blog-sample-code/tree/main/src/designpatterns/strategy)에 저장되어있다.
 
 ## 2. 전략패턴의 이점
 

@@ -112,6 +112,98 @@ public class Main {
 클라이언트 측에서의 이점은 Context와 Stategy가 느슨하게 결합되어 클라이언트 측 개발자는 구현메소드(ConcreateStrategy클래스의 strategyMethod()를 의미한다.)의 내용을 알 필요 없이 각 ConcreateStrategy클래스가 어떤 기능을 하는지만 숙지한채 상황에 따라 구현클래스를 교체하여 사용 할 수 있다.
 
 
-<!-- ## 3. Spring에서의 전략패턴 -->
+## 3. 전략패턴의 한계
+
+전략패턴은 클라이언트가 전략에 대한 구체적인 구현을 모르고 있어도 된다는 것이 이점이지만 한편으로는 클라이언트 측에서 전략을 구현하지 못 한다는 것은 커스텀이 불가능하다는 의미이기도하다. 그래서 많은 전략패턴 사례들은 실제로 클라이언트 측에서 전략을 구현하여 주입해주는 방법으로 사용되어지고 있다. 이러한 것을 의존성 주입이라고 한다. 4. 전략패턴의 사례에서 의존성 주입을 통해서 전략패턴이 실제 어떻게 사용되어지고 있는지 알아본다.
+
+## 4. 전략패턴 사례
+
+자바에서는 객체의 대소비교를 위해서 interface Comparator<T> 를 제공한다. Comparator는 전략패턴의 Strategy 인터페이스라고 할 수 있다. 즉 Comparator의 구현클래스들은 Comparator로 캡슐화된 대소비교를 위한 알고리즘 집합체이다. 위의 예시 다른 점은 Comparator의 구현체는 클라이언트 측에서 직접 구현하여 주입해 줄 수 있다는 것이다. 아래는 Comparator 인터페이스의 사용예시이다.
+
+```java
+class Person{
+    public Person(int no) {
+        this.no = no;
+    }
+
+    int no;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "no=" + no +
+                '}';
+    }
+}
+
+class AscendingPersonComparator implements Comparator<Person> {
+    @Override
+    public int compare(Person o1, Person o2) {
+        if(o1.no > o2.no){
+            return 1;
+        }else if(o1.no < o2.no){
+            return -1;
+        }else {
+            return 0;
+        }
+    }
+}
+
+class DescendingPersonComparator implements Comparator<Person>{
+    @Override
+    public int compare(Person o1, Person o2) {
+        if(o1.no > o2.no){
+            return -1;
+        }else if(o1.no < o2.no){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        List<Person> list = new ArrayList<>();
+
+        list.add(new Person(2));
+        list.add(new Person(0));
+        list.add(new Person(4));
+        list.add(new Person(1));
+        list.add(new Person(3));
+
+        System.out.println("---현재상태---");
+        list.stream().forEach(System.out::print);
+
+        System.out.println();
+        System.out.println("---오름차순으로 전략교체---");
+        Collections.sort(list, new AscendingPersonComparator());
+
+        list.stream().forEach(System.out::print);
+
+        System.out.println();
+        System.out.println("---내림차순으로 전략교체---");
+        Collections.sort(list, new DescendingPersonComparator());
+
+        list.stream().forEach(System.out::print);
+
+    }
+
+
+}
+
+실행결과
+---현재상태---
+Person{no=2}Person{no=0}Person{no=4}Person{no=1}Person{no=3}
+---오름차순으로 전략교체---
+Person{no=0}Person{no=1}Person{no=2}Person{no=3}Person{no=4}
+---내림차순으로 전략교체---
+Person{no=4}Person{no=3}Person{no=2}Person{no=1}Person{no=0}
+```
+
+코드와 실행결과를 보면 두개의 전략 즉 오름차순과 내림차순에 대한 비교 메소드을 구현하여 런타임시에 교체하여 사용한 것을 알 수 있다. 아래의 코드는 ![여기](https://github.com/GyujinAn/blog-sample-code/tree/main/src/designpatterns/strategy02)에 저장되어 있다.
+
 
 

@@ -78,9 +78,16 @@ class ProblemFaxSender {
 
 ### 2.1 옵저버패턴의 정의
 
-옵저버 패턴은 한 객체의 상태가 변경되면 그 객체에 의존하는 객체들에게 변경 상태를 느슨한 결합으로 알려줌으로써 상태값을 가지고 있는 객체와 의존하는 객체의 유연성과 확장성을 보장하는 디자인 패턴이다. 상태값에 의존하는 객체를 Observer라고 하고 상태값을 가지고 있는 객체를 Subject라고 한다.
+옵저버 패턴은 한 객체의 상태가 변경되면 그 객체에 의존하는 객체들에게 변경 상태를 느슨한 결합으로 알려줌으로써 상태값을 가지고 있는 객체와 의존하는 객체의 유연성과 확장성을 보장하는 디자인 패턴이다. 
 
-### 2.2 옵저버패턴의 구현
+### 2.2 옵저버패턴의 구조
+
+![observer-pattern-01](/public/images/observer-pattern-01.png)
+
+상태값에 의존하는 객체는 Observer인터페이스를 implements하여 상태값을 가지는 객체에게 추상화 된 인터페이스를 제공한다. 상태값을 가지는 객체는 Subject인터페이스를 implements함으로써 옵저버 관리를 위한 메소드를 구현한다. 
+
+
+### 2.3 옵저버패턴의 구현
 
 구현클래스의 update메소드의 시그니처는 void update(String title, String contents)로서 통일되어 있으므로 인터페이스로 추상화가 가능하고 아래와 같이 코딩 할 수 있다.
 
@@ -212,9 +219,9 @@ public class NewsStation implements Subject {
 
 여기서 중요한 것은 NewsStation클래스에는 더 이상 Sender구현클래스 대한 타입이 없어지므로써 구현클래스에 대한 의존도가 사라지게 되었다는 것이다. 전체 코드는 [여기서](https://github.com/GyujinAn/blog-sample-code/tree/main/src/designpatterns/observer01) 확인 할 수 있다.
 
-### 2.3 push와 pull
+### 2.4 push와 pull
 
-옵저버 패턴은 두가지의 구현방식이 존재한다. 첫번째는 푸쉬방식이다. 푸쉬방식은 Subject가 데이터를 직접 옵저버에게 넘겨주는 방식이다. 위의 코드는 Subject를 implement한 NewsStation클래스에서 observer.update(title, contents)를 통해서 tilte과 contents를 직접 넘겨준다.
+옵저버 패턴은 두가지의 구현방식이 존재한다. 첫번째는 푸쉬방식이다. 푸쉬방식은 Subject가 데이터를 직접 옵저버에게 넘겨주는 방식이다. 위의 코드는 Subject를 implements한 NewsStation클래스에서 observer.update(title, contents)를 통해서 tilte과 contents를 직접 넘겨준다.
 
 두번째 pull방식이다. pull 방식은 Subject는 옵저버에게 업데이트 사실만 알리고 자신의 참조를 넘겨줌으로써 옵저버에서 데이터를 가져갈 수 있도록 한다. pull 방식일때 notifyObservers()를 아래와 같이 코딩할 수 있다.
 

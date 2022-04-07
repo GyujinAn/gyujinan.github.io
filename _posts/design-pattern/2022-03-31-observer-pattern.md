@@ -217,7 +217,7 @@ public class NewsStation implements Subject {
 }
 ```
 
-여기서 중요한 것은 NewsStation클래스에는 더 이상 Sender구현클래스 대한 타입이 없어지므로써 구현클래스에 대한 의존도가 사라지게 되었다는 것이다. 전체 코드는 [여기서](https://github.com/GyujinAn/blog-sample-code/tree/main/src/designpatterns/observer01) 확인 할 수 있다.
+여기서 중요한 것은 NewsStation클래스에는 더 이상 Sender구현클래스 대한 타입이 없어지므로써 구현클래스에 대한 의존도가 사라지게 되었다는 것이다. 전체 코드는 [여기서](https://github.com/GyujinAn/blog-sample-code/tree/main/java/src/designpatterns/observer01) 확인 할 수 있다.
 
 ### 2.4 push와 pull
 
@@ -238,7 +238,7 @@ public class NewsStation implements Subject {
     }
 ```
 
-코드를 보면 observer.update(title, contents)가 observer.update(this)로 변경된 것을 확인 할 수 있다. pull 방식의 전체코드는 [여기서](https://github.com/GyujinAn/blog-sample-code/tree/main/src/designpatterns/observer02) 확인 할 수 있다.
+코드를 보면 observer.update(title, contents)가 observer.update(this)로 변경된 것을 확인 할 수 있다. pull 방식의 전체코드는 [여기서](https://github.com/GyujinAn/blog-sample-code/tree/main/java/src/designpatterns/observer02) 확인 할 수 있다.
 
 ## 3. 옵저버패턴의 주의점
 

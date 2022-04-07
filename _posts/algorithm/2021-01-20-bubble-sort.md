@@ -9,7 +9,7 @@ categories: algorithm
 
 정렬은 데이터에 대한 검색을 효율적으로 하기 위해서 교환, 선택, 삽입을 사용하여 오름차순(ascending order) 혹은 내림차순(descending order)으로 데이터를 나열하는 것이다. 검색에 대한 효율성이 향상되기 때문에 알고리즘 시간복잡도에 큰 영향을 줄 수 있다. 정렬 알고리즘은 여러가지가 있는데 이번 포스팅에서는 오름차순의 버블 정렬에 대해 포스팅한다.
 
-* [소스코드](https://github.com/GyujinAn/blog-sample-code/tree/main/src/algorithm/bubblesort)
+* [소스코드](https://github.com/GyujinAn/blog-sample-code/tree/main/java/src/algorithm/bubblesort)
 
 ## Pass
 

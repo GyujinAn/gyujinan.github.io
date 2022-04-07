@@ -99,7 +99,7 @@ public class Main {
 
 ```
 위의 실행 과정을 보면 케빈듀란트는 상황에 따라 동적으로 적절한 공격전략을 선택하여 실행하는 것을 알 수 있다.
-위의 모든 코드는 [여기](https://github.com/GyujinAn/blog-sample-code/tree/main/src/designpatterns/strategy)에 저장되어있다.
+위의 모든 코드는 [여기](https://github.com/GyujinAn/blog-sample-code/tree/main/java/src/designpatterns/strategy01)에 저장되어있다.
 
 ## 2. 전략패턴의 이점
 
@@ -203,7 +203,7 @@ Person{no=0}Person{no=1}Person{no=2}Person{no=3}Person{no=4}
 Person{no=4}Person{no=3}Person{no=2}Person{no=1}Person{no=0}
 ```
 
-코드와 실행결과를 보면 두개의 전략 즉 오름차순과 내림차순에 대한 비교 메소드을 구현하여 런타임시에 교체하여 사용한 것을 알 수 있다. 아래의 코드는 [여기](https://github.com/GyujinAn/blog-sample-code/tree/main/src/designpatterns/strategy02)에 저장되어 있다.
+코드와 실행결과를 보면 두개의 전략 즉 오름차순과 내림차순에 대한 비교 메소드을 구현하여 런타임시에 교체하여 사용한 것을 알 수 있다. 아래의 코드는 [여기](https://github.com/GyujinAn/blog-sample-code/tree/main/java/src/designpatterns/strategy02)에 저장되어 있다.
 
 
 

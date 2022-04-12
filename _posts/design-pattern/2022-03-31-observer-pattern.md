@@ -4,9 +4,7 @@ title: "옵저버 패턴(observer pattern)"
 date: 2022-03-31
 categories: DesignPattern
 ---
-
 # 옵저버패턴(observer pattern)
-
 
 ## 1. 왜 옵저버패턴을 사용하는가?
 

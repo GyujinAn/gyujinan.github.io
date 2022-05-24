@@ -23,12 +23,147 @@ categories: DesignPattern
 
 ## 2. 팩토리 패턴이란 무엇인가?
 
-### 2.1 팩토리 메소드 패턴과 추상 팩토리 패턴
+클라이언트에서 구상클래스의 인스턴스를 생성하면서 생기는 구상클래스 의존성의 문제를 해결하기 위해서 팩토리 패턴을 사용한다. 팩토리 패턴은 팩토리 메소도 패턴과 추상 팩토리 패턴 두가지가 존재한다.
 
-인스턴스를 생성하는 서비스를 만들 때 여러가지 상황을 고려하고 패턴을 정하여 개발을 진행해야한다. 팩토리 메소드 패턴이 제공되어야 할 상황은 모듈을 사용하는 클라이언트 측에 인스턴스 생성과정을 감추고 생성해야하는 인스턴스의 클래스들이 구조적인 상속관계를 이루고 있을때 사용한다. 구체적인 구현은 아래에서 설명한다.
+### 2.1 왜 팩토리 메소드 패턴을 사용하는가?
 
-### 2.2 팩토리 메소드 패턴의 정의
+추상메소드에서 구상클래스 별로 특정 인스턴스가 필요하다면 어떻게 생성해야될까? 추상메소드에서 구상클래스 별로 특정 인스턴스를 생성한다면 추상메소드가 OCP와 DIP를 위반하게 된다. 이러한 상황에서 팩토리 메소드 패턴을 이용하여 OCP와 DIP를 지키도록 할 수 있다.
+
+### 2.2 병렬 클래스 계층 구조
+
+보통 팩토리 메소드 패턴은 병렬 클래스 계층 구조에서 많이 사용된다. 병렬 클래스 계층 구조란 상위클래스를 확장한 서브클래스 별로 특정 인터페이스 구현체가 존재하는 구조이다. 아래의 팩토리 메소드 패턴의 UML를 살펴보면 Creator를 상속한 ConcreteCreator 별로 ConcreateProduct가 존재 할 수 있다. 이렇게 ConcreateCreator가 확장되면 될수록 ConcreteProduct도 병렬적으로 확장되는 구조를 병렬 클래스 계층 구조라고 한다.
+
+### 2.3 팩토리 메소드 패턴 정의
+
+상위클래스에서 사용하는 특정 인스턴스를 하위클래스에서 생성하도록 함으로써 상위클래스의 OCP와 DIP를 지키도록 하는 디자인 패턴이다.
+
+### 2.4 팩토리 메소드 패턴의 구조
+
+![factory-method-pattern-01](/public/images/factory-method-pattern-01.png)
+
+Creator는 ConcreateCreator의 상위클래스이다. Creator에서 OPC와 DIP를 지키기 위해서 ConcreteProduct는 의존하지 않은 채 Product에만 의존하여 ConcreteProduct를 사용해야한다. 그러므로 Creator는 팩토리 메소드를 추상메소드로 선언하고 실제 인스턴스 생성은 서브클래스에서 추상메소드를 구현하여 한다. ConcreteCreator와 ConcreteProduct는 병렬 구조를 이루고 있기때문에 ConcreteCreator는 자신이 어떤 ConcreteProduct 인스턴스를 생성해야 하는지 알아야한다.
+
+### 2.5 팩토리 메소드 패턴의 구현
+
+팩토리 메소드 패턴을 직접 구현해본다. Creator는 어떤 데이터를 파일로 출력하는 로직을 가지고 있는 모듈이라고 가정한다. Product는 파일의 메타데이터를 저장하는 모듈이라고 가정한다.
+
+<br>
+
+일단 Creator와 그에 해당하는 구상클래스를 구현해본다. Creator는 FilePrinter라는 추상클래스로 구현하고 구상클래스는 파일의 특성에 따라 ImgFilePrinter, MusicFilePrinter, VideoFilePrinter와 같이 구현한다.
+
+```java
+public abstract class FilePrinter {
 
 
+    void printToFile(){
+        ContentFile contentFile = createContentFile("~","my","data","filename");
+        contentFile.getPath();
+        System.out.println(contentFile.getFileName() +"를 "+contentFile.getPath() +"에 파일로 출력한다.");
+    }
+
+    abstract ContentFile createContentFile(String basePath, String owner, String data, String fileName);
 
 
+}
+
+class ImgFilePrinter extends FilePrinter{
+    @Override
+    ContentFile createContentFile(String basePath, String owner, String data, String fileName) {
+        return new ImgFile(basePath, owner, data, fileName);
+    }
+}
+
+class MusicFilePrinter extends FilePrinter{
+    @Override
+    ContentFile createContentFile(String basePath, String owner, String data, String fileName) {
+        return new MusicFile(basePath, owner, data, fileName);
+    }
+}
+
+class VideoFilePrinter extends FilePrinter{
+    @Override
+    ContentFile createContentFile(String basePath, String owner, String data, String fileName) {
+        return new VideoFile(basePath, owner, data, fileName);
+    }
+}
+
+```
+
+FilePrinter는 printToFile메소드에서 Product인 ContentFile에 의존하고 그에 따른 구현체는 서브클래스의 createContentFile메소드에서 생성한다.
+
+<br>
+
+Product와 그에 해당하는 구상클래스를 구현해본다. Product는 ContentFile라는 추상클래스로 구현하고 구상클래스는 파일의 특성에 따라 ImgFile, MusicFile, VideoFile와 같이 구현한다.
+
+```java
+public abstract class ContentFile {
+    protected final String basePath;
+
+    protected final String userId;
+
+    protected final String fileName;
+
+    protected final String data;
+
+    public ContentFile(String basePath, String userId, String fileName, String data) {
+        this.basePath = basePath;
+        this.userId = userId;
+        this.fileName = fileName;
+        this.data = data;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    abstract String getPath();
+
+
+    protected String getBasePath(){
+        return basePath + "/" + userId + "/";
+    }
+}
+
+class ImgFile extends ContentFile{
+
+    private final String CONTENT_TYPE = "img";
+
+    public ImgFile(String basePath, String userId, String fileName, String data) {
+        super(basePath, userId, fileName, data);
+    }
+
+    @Override
+    String getPath() {
+        return getBasePath() + CONTENT_TYPE + "/" + fileName;
+    }
+}
+
+class MusicFile extends ContentFile{
+    private final String CONTENT_TYPE = "music";
+
+    public MusicFile(String basePath, String userId, String fileName, String data) {
+        super(basePath, userId, fileName, data);
+    }
+
+    @Override
+    String getPath() {
+        return getBasePath() + CONTENT_TYPE + "/" + fileName;
+    }
+}
+
+class VideoFile extends ContentFile{
+    private final String CONTENT_TYPE = "video";
+
+    public VideoFile(String basePath, String userId, String fileName, String data) {
+        super(basePath, userId, fileName, data);
+    }
+    @Override
+    String getPath() {
+        return getBasePath() + CONTENT_TYPE + "/" + fileName;
+    }
+
+
+}
+```
+
+Product의 구상클래스에서는 Creator클래스에서 필요로 하는 getPath()메소드를 구현하여 제공한다.

@@ -1,4 +1,4 @@
-<!-- ---
+---
 layout: post
 title: "SOLID란 무엇인가?"
 date: 2022-03-13
@@ -22,4 +22,4 @@ categories: DesignPattern
 
 # 5. 인터페이스 분리 원칙 (ISP Interface Segregation Principle)
 
-# 6. 의존관계 역전 원칙 (DIP Dependency Inversion Principle) -->
+# 6. 의존관계 역전 원칙 (DIP Dependency Inversion Principle)

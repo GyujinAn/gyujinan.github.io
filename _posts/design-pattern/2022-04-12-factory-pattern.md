@@ -201,6 +201,7 @@ Product의 구현클래스에서는 Creator클래스에서 필요로 하는 getP
 추상팩토리가 사용되는 상황과 추상팩토리 패턴을 구현해본다. 해당 소스코드는 [여기](https://github.com/GyujinAn/blog-sample-code/tree/main/java/src/designpatterns/abstractfactory01)에 저장되어 있다.
 
 * Client
+
 ```java
 public class Client {
 
@@ -225,9 +226,11 @@ public class Client {
     }
 }
 ```
+
 Client는 두개의 AbstractProduct에 의존한다. 두개의 AbstractProduct 의해 참조되는 객체들은 관련성에 의한 객체군이라고 할 수 있다. 그리고 해당 객체군을 생성하기 위해서 AbstractFactory에 의존한다. createProduct()를 보면 객체군에 존재하는 두개의 객체를 생성한다. Product든 Factory든 객체군의 관련성에 의한 OCP와 DIP를 지키기 위해 추상화 된 인터페이스로 표현되어있다.
 
 * AbstractProduct, AbstractFactory
+
 ```java
 interface AbstractProductA {
     void firstMethodInProductA();
@@ -248,6 +251,7 @@ interface AbstractFactory {
 Client에서 의존하는 인터페이스 AbstractProduct, AbstractFactory의 정의이다. 
 
 * ConreteProduct, ConcreteFactory
+
 ```java
 public class ConcreteProductA1 implements AbstractProductA{
 
